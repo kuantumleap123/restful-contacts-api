@@ -1,0 +1,31 @@
+<%- include('../partials/header.ejs') %>
+<% if(contacts.length == 0) { %>
+    Contact list empty.
+<% } else { %>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>View</th>
+        </tr>
+
+        <% for(let i=0;i<contacts.length;i++) { %>
+            <tr>
+                <td><%= contacts[i].id %></td>
+                <td><%= contacts[i].name %></td>
+                <td><%= contacts[i].phone %></td>
+                <td><a href="/contacts/<%= contacts[i].id %>">View</a></td>
+            </tr>
+        <% } %>
+        
+    </table>
+<% } %>
+
+<br><br>
+
+<form method="post">
+    Name: <input type="text" name="name"><br>
+    Phone: <input type="text" name="phone"><br>
+    <input type="submit" value="Add">
+</form>

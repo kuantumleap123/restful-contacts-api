@@ -1,0 +1,50 @@
+<%- include('../partials/header.ejs') %>
+<script type="text/javascript">
+    function deleteContact(id)
+    {
+        $.ajax({
+            type: 'DELETE',
+            url: '/contacts/' + id,
+            success: () => {
+                location.href = '/contacts'
+            }
+        });
+    }
+
+    function editContact(id)
+    {
+        $.ajax({
+            type: 'PUT',
+            url: '/contacts/' + id,
+            data: $("form").serialize(),
+            success: () => {
+                location.href = '/contacts'
+            }
+        });
+        
+    }
+    
+</script>
+<forms>
+<table>
+    <tr>
+        <th>ID</th>
+        <td><%= contact.id %></td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td><input type="text" name='name' value="<%= contact.name %>"></td>
+    </tr>
+    <tr>
+        <th>Phone</th>
+        <td><input type="text" name='phone' value="<%= contact.phone %>"></td>
+    </tr>
+</table>
+</form>
+
+<br><br>
+
+<button onclick="editContact(<%= contact.id %>)">Edit</button>
+<button onclick="deleteContact(<%= contact.id %>)">Delete</button>
+<br><br>
+<a href="/contacts">Back</a>
